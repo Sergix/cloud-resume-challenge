@@ -1,0 +1,9 @@
+{
+  "resource": "/visitor-count",
+  "path": "/visitor-count",
+  "httpMethod": "GET",
+  "isBase64Encoded": false,
+  "queryStringParameters": {
+    "action": "get"
+  }
+}

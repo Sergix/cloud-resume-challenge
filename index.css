@@ -1,0 +1,17 @@
+html, body {
+	background-color: #111;
+	font-family: sans-serif;
+}
+
+body {
+	max-width: 1200px;
+}
+
+header, main, footer {
+	background-color: #eee;
+	border-radius: 7px;
+	padding: 0.25em;
+	margin: 0.5em;
+}
+
+
