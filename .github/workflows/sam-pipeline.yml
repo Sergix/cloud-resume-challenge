@@ -4,7 +4,7 @@ on:
       - 'aws-sam/**'
 defaults:
   run:
-    working-directory: ./aws-sam
+    working-directory: aws-sam
 jobs:
   pytest:
     runs-on: ubuntu-latest
