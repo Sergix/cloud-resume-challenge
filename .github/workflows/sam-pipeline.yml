@@ -9,7 +9,7 @@ jobs:
   pytest:
     runs-on: ubuntu-latest
     steps:
-    - run: pytest -v --disable-socket -s tests/unit
+    - run: pytest
   sam-build-deploy:
     needs: pytest
     runs-on: ubuntu-latest
