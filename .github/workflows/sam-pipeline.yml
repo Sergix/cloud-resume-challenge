@@ -9,7 +9,7 @@ jobs:
   pytest:
     runs-on: ubuntu-latest
     steps:
-    - run: sam local invoke VisitorCountFunction --event events/event.json    
+    - run: pytest -v --disable-socket -s tests/unit
   sam-build-deploy:
     needs: pytest
     runs-on: ubuntu-latest
