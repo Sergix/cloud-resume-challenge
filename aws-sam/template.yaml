@@ -19,7 +19,7 @@ Resources:
   VisitorCountFunction:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
-      CodeUri: visitor-count/
+      CodeUri: visitor_count/
       Handler: app.lambda_handler
       Runtime: python3.10
       Architectures:
@@ -77,4 +77,4 @@ Outputs:
     Value: !GetAtt VisitorCountFunction.Arn
   VisitorCountFunctionIamRole:
     Description: Implicit IAM Role created for VisitorCount function
-    Value: !GetAtt VisitorCountFunctionRole.Arn
+    Value: !GetAtt VisitorCountFunctionRole.Arn 

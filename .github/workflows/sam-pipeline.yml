@@ -1,7 +1,7 @@
-on:
-  push:
-    paths:
-      - 'aws-sam/**'
+on: [push]
+  # push:
+    # paths:
+      # - 'aws-sam/**'
 defaults:
   run:
     working-directory: aws-sam
