@@ -25,11 +25,24 @@ Resources:
       Architectures:
       - x86_64
       Events:
-        VisitorCount:
+        VisitorCountHttpApi:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /visitor-count
             Method: get
+      # https://repost.aws/knowledge-center/lambda-sam-template-permissions
+      Policies:
+      - Statement:
+        - Sid: DynamoReadWriteVisitorCountPolicy
+          Effect: Allow
+          Action:
+          - dynamodb:GetItem
+          - dynamodb:Scan
+          - dynamodb:Query
+          - dynamodb:DescribeTable
+          - dynamodb:PutItem
+          - dynamodb:UpdateItem
+          Resource: '*'
 
   VisitorCountTable:
     Type: AWS::Serverless::SimpleTable
@@ -56,9 +69,9 @@ Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  VisitorCountApi:
+  VisitorCountHttpApi:
     Description: API Gateway endpoint URL for Prod stage for Hello World function
-    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/hello/"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/visitor-count"
   VisitorCountFunction:
     Description: Visitor Count Lambda Function ARN
     Value: !GetAtt VisitorCountFunction.Arn

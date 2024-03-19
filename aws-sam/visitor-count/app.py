@@ -14,11 +14,17 @@ def increment_visitor_count():
     )
 
 def get_visitor_count():
+    # if not exist, create
     res = table.get_item(
         Key={ 'WebPropertyName': 'VisitorCount'}
     )
-    item = res['Item']
-    return int(item['VisitorCount'])
+    if 'Item' not in res:
+        table.put_item(
+            Item={ 'WebPropertyName': 'VisitorCount', 'VisitorCount': 0 }
+        )
+        return 0
+    
+    return int(res['Item']['VisitorCount'])
     
 def lambda_handler(event, context):
     if 'queryStringParameters' not in event:
