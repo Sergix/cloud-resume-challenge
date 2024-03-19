@@ -8,6 +8,7 @@ defaults:
 jobs:
   pytest:
     runs-on: ubuntu-latest
+    environment: aws-sam
     permissions:
       id-token: write
       contents: read
