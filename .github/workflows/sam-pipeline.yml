@@ -2,15 +2,15 @@ on: [push]
   # push:
     # paths:
       # - 'aws-sam/**'
-permissions:
-  id-token: write
-  contents: read
 defaults:
   run:
     working-directory: aws-sam
 jobs:
   pytest:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     steps:
     # https://stackoverflow.com/questions/64405836/github-actions-no-such-file-or-directory-on-any-run-step
     - uses: actions/checkout@v3
@@ -18,7 +18,7 @@ jobs:
       with:
         python-version: '3.10'
         cache: 'pip'
-    - uses: aws-actions/configure-aws-credentials@v4
+    - uses: aws-actions/configure-aws-credentials@v2
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -32,6 +32,9 @@ jobs:
   sam-build-deploy:
     needs: pytest
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write
+      contents: read
     # https://github.com/aws-actions/setup-sam
     steps:
     - uses: actions/checkout@v3
