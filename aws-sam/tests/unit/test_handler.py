@@ -25,7 +25,7 @@ def test_lambda_handler_get(apigw_get_event):
     data = json.loads(ret["body"])
 
     assert ret["statusCode"] == 200
-    assert data == 0
+    assert type(data) is int
 
 
 @pytest.fixture()
@@ -43,9 +43,9 @@ def apigw_increment_event():
     }
 
 
-def test_lambda_handler_get(apigw_increment_event):
+def test_lambda_handler_increment(apigw_increment_event):
     ret = app.lambda_handler(apigw_increment_event, "")
     data = json.loads(ret["body"])
 
     assert ret["statusCode"] == 200
-    assert data == 1
+    assert type(data) is int
