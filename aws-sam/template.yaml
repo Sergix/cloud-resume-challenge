@@ -3,21 +3,19 @@ Transform: AWS::Serverless-2016-10-31
 Description: >
   cloud-resume
 
-# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
     Timeout: 3
     MemorySize: 128
 
     Tracing: Active
-    # You can add LoggingConfig parameters such as the Logformat, Log Group, and SystemLogLevel or ApplicationLogLevel. Learn more here https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-resource-function.html#sam-function-loggingconfig.
     LoggingConfig:
       LogFormat: JSON
   Api:
     TracingEnabled: true
 Resources:
   VisitorCountFunction:
-    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Type: AWS::Serverless::Function
     Properties:
       CodeUri: visitor_count/
       Handler: app.lambda_handler
@@ -25,11 +23,15 @@ Resources:
       Architectures:
       - x86_64
       Events:
-        VisitorCountHttpApi:
-          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+        VisitorCountApi:
+          Type: Api
           Properties:
             Path: /visitor-count
             Method: get
+            # https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/sam-property-function-requestparameter.html
+            RequestParameters:
+              - method.request.querystring.action:
+                  Required: true
       # https://repost.aws/knowledge-center/lambda-sam-template-permissions
       Policies:
       - Statement:
@@ -69,7 +71,7 @@ Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
   # Find out more about other implicit resources you can reference within SAM
   # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
-  VisitorCountHttpApi:
+  VisitorCountApi:
     Description: API Gateway endpoint URL for Prod stage for Hello World function
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/visitor-count"
   VisitorCountFunction:
