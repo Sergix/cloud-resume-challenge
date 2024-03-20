@@ -31,10 +31,10 @@ class TestApiGateway:
 
         stacks = response["Stacks"]
         stack_outputs = stacks[0]["Outputs"]
-        api_outputs = [output for output in stack_outputs if output["OutputKey"] == "VisitorCountApi"]
+        api_outputs = [output for output in stack_outputs if output["OutputKey"] == "VisitorCountHttpApi"]
 
         if not api_outputs:
-            raise KeyError(f"VisitorCountApi not found in stack {stack_name}")
+            raise KeyError(f"VisitorCountHttpApi not found in stack {stack_name}")
 
         return api_outputs[0]["OutputValue"]  # Extract url from stack outputs
 
