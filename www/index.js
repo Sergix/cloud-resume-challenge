@@ -8,5 +8,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
 		}
 	};
 	xhr.open("GET", baseURL + "/visitor-count?action=increment", true);
-	xhr.send();
+
+	// secret flag for disabling
+	if (window.location.hash !== "#nojs") {
+		xhr.send();
+	}
 })
