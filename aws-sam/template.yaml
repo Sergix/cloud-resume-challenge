@@ -32,6 +32,9 @@ Resources:
             RequestParameters:
               - method.request.querystring.action:
                   Required: true
+            # Domain:
+            #   DomainName: cloudresume.sergix.dev
+            #   CertificateArn: 
       # https://repost.aws/knowledge-center/lambda-sam-template-permissions
       Policies:
       - Statement:

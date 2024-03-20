@@ -1,4 +1,4 @@
-var baseURL = "https://k6mm4ahuyb.execute-api.us-east-1.amazonaws.com/Prod"
+var baseURL = "https://b7o3qabiij.execute-api.us-east-1.amazonaws.com/Prod"
 
 document.addEventListener("DOMContentLoaded", function(event) {
 	var xhr = new XMLHttpRequest({ mozSystem: true, mozAnon: true });
