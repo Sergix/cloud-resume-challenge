@@ -1,0 +1,20 @@
+on:
+  push:
+    paths:
+      - 'www/**'
+defaults:
+  run:
+    working-directory: www
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: aws-sam
+    steps:
+    - uses: actions/checkout@v3
+    - uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+    - run: aws s3 sync ./ s3://cloudresume.sergix.dev --delete
+    - run: aws cloudfront create-invalidation --distribution-id ${{ secrets.AWS_CLOUDFRONT_ID }} --paths /*
