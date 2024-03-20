@@ -9,9 +9,6 @@ jobs:
   pytest:
     runs-on: ubuntu-latest
     environment: aws-sam
-    permissions:
-      id-token: write
-      contents: read
     steps:
     # https://stackoverflow.com/questions/64405836/github-actions-no-such-file-or-directory-on-any-run-step
     - uses: actions/checkout@v3
@@ -35,9 +32,6 @@ jobs:
     needs: pytest
     runs-on: ubuntu-latest
     environment: aws-sam
-    permissions:
-      id-token: write
-      contents: read
     # https://github.com/aws-actions/setup-sam
     steps:
     - uses: actions/checkout@v3
